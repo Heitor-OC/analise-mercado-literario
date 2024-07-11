@@ -1,17 +1,17 @@
-from djongo import models
+from mongoengine import Document, StringField, FloatField, URLField, ReferenceField, CASCADE
 
-class Category(models.Model):
-    name = models.CharField(max_length=100)
+class Category(Document):
+    name = StringField(max_length=100, required=True)
 
     def __str__(self):
         return self.name
 
-class Book(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    old_price = models.FloatField(null=True, blank=True)
-    new_price = models.FloatField()
-    image_url = models.URLField(null=True, blank=True)
+class Book(Document):
+    category = ReferenceField(Category, reverse_delete_rule=CASCADE)
+    title = StringField(max_length=200, required=True)
+    old_price = FloatField(null=True, blank=True)
+    new_price = FloatField(required=True)
+    image_url = URLField(null=True, blank=True)
 
     def __str__(self):
         return self.title
