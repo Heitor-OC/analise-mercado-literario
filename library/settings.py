@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     
     'books',
     'django_mongoengine',
+    'django_mongoengine.mongo_admin',
+
 ]
 
 MIDDLEWARE = [
