@@ -41,9 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'books',
-    'djongo',
+    'django_mongoengine',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,16 +78,22 @@ WSGI_APPLICATION = 'library.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+from mongoengine import connect
+
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'CEUB',
-        'CLIENT': {
-            'host': 'mongodb+srv://heitorocosta:X3nsAW6gMIZNGeC7@cluster0.ydlexhu.mongodb.net/CEUB?retryWrites=true&w=majority&appName=Cluster0',
-            'ssl': True,
-        }
+        'ENGINE': 'django.db.backends.dummy'
     }
 }
+
+connect(
+    db='CEUB',
+    username='heitorocosta',
+    password='X3nsAW6gMIZNGeC7',
+    host='mongodb+srv://heitorocosta:X3nsAW6gMIZNGeC7@cluster0.ydlexhu.mongodb.net/CEUB?retryWrites=true&w=majority&appName=Cluster0',
+    ssl=True
+)
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
